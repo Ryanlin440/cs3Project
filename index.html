@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Localization Sim</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <div class="square" id="outer"></div>
+    <div class="square" id="inner"></div>
+
+    <div id="robot" class="robot">
+      <div id="beam-front" class="sensor-beam"></div>
+      <div id="beam-right" class="sensor-beam"></div>
+      <div id="beam-left" class="sensor-beam"></div>
+    </div>
+    <div id="robot2" class="robot"></div>
+
+    <svg id="uncertainty" width="884" height="884"></svg>
+
+    <div id="panel">
+     <div class="col">
+      <section class="card">
+        <h3>Controls</h3>
+        <p class="hint">Robot 1: <b>W A S D</b> &nbsp;·&nbsp; reset <b>X</b></p>
+        <p class="hint">Robot 2: <b>Arrow keys</b></p>
+        <button id="toggle-robot2">Hide robot 2</button>
+      </section>
+
+      <section class="card">
+        <h3>Ground truth</h3>
+        <table>
+          <tr><td>X</td><td id="true-x">-</td></tr>
+          <tr><td>Y</td><td id="true-y">-</td></tr>
+          <tr><td>Heading</td><td id="true-heading">-</td></tr>
+          <tr class="divider"><td>Front</td><td id="true-front">-</td></tr>
+          <tr><td>Right</td><td id="true-right">-</td></tr>
+          <tr><td>Left</td><td id="true-left">-</td></tr>
+        </table>
+      </section>
+
+      <section class="card">
+        <h3>Odometry <span class="tag">noisy</span></h3>
+        <table>
+          <tr><td>X</td><td id="odom-x">-</td></tr>
+          <tr><td>Y</td><td id="odom-y">-</td></tr>
+          <tr><td>Heading</td><td id="odom-heading">-</td></tr>
+        </table>
+      </section>
+
+     </div>
+     <div class="col">
+      <section class="card">
+        <h3>Distance sensors <span class="tag">noisy</span></h3>
+        <table>
+          <tr><td>Front</td><td id="noisy-front">-</td></tr>
+          <tr><td>Right</td><td id="noisy-right">-</td></tr>
+          <tr><td>Left</td><td id="noisy-left">-</td></tr>
+        </table>
+        <h4>Predicted pose from sensors</h4>
+        <table>
+          <tr><td>X</td><td id="sensor-x">-</td></tr>
+          <tr><td>Y</td><td id="sensor-y">-</td></tr>
+          <tr><td>Heading</td><td id="sensor-heading">-</td></tr>
+        </table>
+        <p class="note">* no sensor sees a wall on this axis, so the odometry value is shown</p>
+      </section>
+
+      <section class="card">
+        <h3>Filter estimate <span class="tag">UKF</span></h3>
+        <table>
+          <tr><td>X</td><td id="ukf-x">-</td></tr>
+          <tr><td>Y</td><td id="ukf-y">-</td></tr>
+          <tr><td>Heading</td><td id="ukf-heading">-</td></tr>
+          <tr class="divider"><td>Filter error</td><td id="ukf-err">-</td></tr>
+          <tr><td>Odom error</td><td id="odom-err">-</td></tr>
+          <tr class="divider"><td>σ X</td><td id="ukf-sx">-</td></tr>
+          <tr><td>σ Y</td><td id="ukf-sy">-</td></tr>
+          <tr><td>σ Heading</td><td id="ukf-st">-</td></tr>
+          <tr><td>95% ellipse</td><td id="ukf-axes">-</td></tr>
+        </table>
+        <h4>Sensor updates</h4>
+        <table>
+          <tr><td>Front</td><td><span id="ukf-use-front" class="status">-</span></td></tr>
+          <tr><td>Right</td><td><span id="ukf-use-right" class="status">-</span></td></tr>
+          <tr><td>Left</td><td><span id="ukf-use-left" class="status">-</span></td></tr>
+        </table>
+        <button id="toggle-correction">Sensor correction: ON</button>
+        <label class="zoom-row">Ellipse zoom
+          <input id="zoom" type="range" min="1" max="100" value="30">
+          <span id="zoom-label">30×</span>
+        </label>
+        <p class="note">Dashed outline = filter pose · ellipse = 95% XY confidence · dots = 7 sigma points (tick = heading). Ellipse and sigma points are drawn magnified by the zoom; the numbers above are true.</p>
+      </section>
+     </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #24323b;
+}
+
+/* ---------- Field ---------- */
+#outer {
+  width: 864px;
+  height: 864px;
+  background-color: #24323b;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+#inner {
+  width: 843px;
+  height: 843px;
+  background-color: #d5e3ec;
+  position: absolute;
+  top: 20.5px;
+  left: 20.5px;
+}
+
+/* ---------- Robots ---------- */
+.robot {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 999;
+  border: 2px solid #4d99e6;
+}
+#robot {
+  background-color: #e83c19;
+}
+#robot2 {
+  background-color: #3a5bd9;
+  border-color: #f2c230;
+  z-index: 998;
+}
+
+/* ---------- Sensor beams ----------
+   Beams are offset by the 2px border so they start at the robot's outer
+   edge (where the sensor is) and their length equals the true reading. */
+.sensor-beam {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.4);
+  pointer-events: none;
+}
+#beam-front {
+  width: 4px;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+#beam-right {
+  height: 4px;
+  top: 50%;
+  left: calc(100% + 2px);
+  transform: translateY(-50%);
+}
+#beam-left {
+  height: 4px;
+  top: 50%;
+  right: calc(100% + 2px);
+  transform: translateY(-50%);
+}
+.sensor-beam.blocked {
+  background-color: rgba(242, 160, 0, 0.75);
+}
+
+/* ---------- Uncertainty overlay ---------- */
+#uncertainty {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+  overflow: visible;
+}
+#uncertainty .ghost {
+  fill: none;
+  stroke: #24323b;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+#uncertainty .cov-ellipse {
+  fill: rgba(255, 255, 255, 0.4);
+  stroke: #1a1a1a;
+  stroke-width: 2;
+}
+#uncertainty .sigma-dot {
+  fill: #ffd400;
+  stroke: #1a1a1a;
+  stroke-width: 1.5;
+}
+#uncertainty .sigma-dot.center {
+  fill: #1a1a1a;
+  stroke: #fff;
+}
+#uncertainty .sigma-tick {
+  stroke: #1a1a1a;
+  stroke-width: 2;
+}
+
+/* ---------- Right panel ---------- */
+#panel {
+  position: absolute;
+  top: 10px;
+  left: 894px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+#panel .col {
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card {
+  background: #f4f8fb;
+  border: 1px solid #c9d6df;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.card h4 {
+  margin: 10px 0 4px;
+  font-size: 13px;
+  color: #3d4f5c;
+}
+.tag {
+  font-size: 11px;
+  font-weight: normal;
+  background: #e0e9ef;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 4px;
+}
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+}
+.card td {
+  padding: 2px 0;
+}
+.card td:last-child {
+  text-align: right;
+}
+.card tr.divider td {
+  border-top: 1px solid #c9d6df;
+  padding-top: 6px;
+}
+.hint {
+  margin: 2px 0;
+  font-size: 13px;
+}
+.note {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: #5a6b77;
+}
+#toggle-robot2,
+#toggle-correction {
+  margin-top: 8px;
+  padding: 5px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.status {
+  font-size: 12px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #e0e9ef;
+}
+.status.used { background: #cdeccf; color: #1f6b2a; }
+.status.outlier { background: #f9d9c9; color: #a33a0b; }
+.status.ambiguous,
+.status.no-reading,
+.status.off { color: #5a6b77; }
+
+.zoom-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+}
+.zoom-row input {
+  flex: 1;
+}
+#zoom-label {
+  font-family: ui-monospace, monospace;
+  width: 40px;
+  text-align: right;
+}
+.zoom-row { white-space: nowrap; }
