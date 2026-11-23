@@ -44,7 +44,7 @@ function wrap180(deg) {
 }
 
 // Standard normal sample (Box-Muller)
-function gaussian() {
+function gaussian() {//grab a sample from mu 0, std dev 1
   let u = 0, v = 0;
   while (u === 0) u = Math.random();
   while (v === 0) v = Math.random();
@@ -167,7 +167,7 @@ const robot1 = new Robot(
 const robot2 = new Robot(
   document.getElementById('robot2'),
   { forward: 'arrowup', back: 'arrowdown', left: 'arrowleft', right: 'arrowright' },
-  650, 250, 180
+  650, 250, 0
 );
 
 const toggleBtn = document.getElementById('toggle-robot2');
@@ -645,8 +645,8 @@ function updateDisplay() {
   SENSORS.forEach((s, i) => setText('noisy-' + s.name, fmtIn(noisy[i])));
 
   const est = estimatePoseFromSensors(noisy);
-  setText('sensor-x', fmtX(est.x) + (est.xFromSensors ? '' : '*'));
-  setText('sensor-y', fmtY(est.y) + (est.yFromSensors ? '' : '*'));
+  setText('sensor-x', fmtX(est.x) + (est.xFromSensors ? '' : ' (odom)'));
+  setText('sensor-y', fmtY(est.y) + (est.yFromSensors ? '' : ' (odom)'));
   setText('sensor-heading', fmtDeg(est.heading) + ' (odom)');
 
   // UKF prediction (covariance + sigma points)
@@ -669,7 +669,6 @@ function updateDisplay() {
     const el = document.getElementById('ukf-use-' + s.name);
     if (!el) return;
     el.textContent = status[i];
-    el.className = 'status ' + status[i].replace(' ', '-');
   });
 }
 

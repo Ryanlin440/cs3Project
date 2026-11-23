@@ -108,96 +108,53 @@ body {
   top: 10px;
   left: 894px;
   display: flex;
-  gap: 10px;
+  gap: 30px;
   align-items: flex-start;
+  font-size: 14px;
 }
 #panel .col {
-  width: 290px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  width: 270px;
 }
-.card {
-  background: #f4f8fb;
-  border: 1px solid #c9d6df;
-  border-radius: 8px;
-  padding: 10px 14px;
+#panel section {
+  margin-bottom: 18px;
 }
-.card h3 {
-  margin: 0 0 6px;
+#panel h3 {
+  margin: 0 0 4px;
   font-size: 15px;
 }
-.card h4 {
-  margin: 10px 0 4px;
-  font-size: 13px;
-  color: #3d4f5c;
-}
-.tag {
-  font-size: 11px;
+#panel h4 {
+  margin: 8px 0 2px;
+  font-size: 14px;
   font-weight: normal;
-  background: #e0e9ef;
-  border-radius: 4px;
-  padding: 1px 6px;
-  margin-left: 4px;
+  text-decoration: underline;
 }
-.card table {
+#panel p {
+  margin: 2px 0;
+}
+#panel table {
   width: 100%;
   border-collapse: collapse;
-  font-family: ui-monospace, monospace;
+  font-family: monospace;
   font-size: 13px;
 }
-.card td {
-  padding: 2px 0;
-}
-.card td:last-child {
+#panel td:last-child {
   text-align: right;
 }
-.card tr.divider td {
-  border-top: 1px solid #c9d6df;
-  padding-top: 6px;
+#panel button {
+  margin-top: 6px;
 }
-.hint {
-  margin: 2px 0;
-  font-size: 13px;
-}
-.note {
-  margin: 6px 0 0;
-  font-size: 11px;
-  color: #5a6b77;
-}
-#toggle-robot2,
-#toggle-correction {
-  margin-top: 8px;
-  padding: 5px 12px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.status {
-  font-size: 12px;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: #e0e9ef;
-}
-.status.used { background: #cdeccf; color: #1f6b2a; }
-.status.outlier { background: #f9d9c9; color: #a33a0b; }
-.status.ambiguous,
-.status.no-reading,
-.status.off { color: #5a6b77; }
-
 .zoom-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  font-size: 13px;
+  gap: 6px;
+  margin-top: 6px;
+  white-space: nowrap;
 }
 .zoom-row input {
   flex: 1;
 }
 #zoom-label {
-  font-family: ui-monospace, monospace;
-  width: 40px;
+  font-family: monospace;
+  width: 36px;
   text-align: right;
 }
-.zoom-row { white-space: nowrap; }
